@@ -20,12 +20,8 @@ function getHumanChoice(){
 }
 
 
-
-
-//loop for 5 rounds
-
 function playGame(){
-    //initializing score letiables
+    //initializing score variables
     let humanScore=0;
     let computerScore=0;    
 
@@ -74,15 +70,17 @@ function playGame(){
 
     }
 
+    //looping 5 times for 5 separate rounds of rock paper scissors.     
     for(let i=1; i<=5; i++){
-    //storing choices in respective variables
-    console.log(`Round ${i}`)
-    let humanSelection = getHumanChoice();
-    let computerSelection = getComputerChoice();    
-    console.log(`You chose ${humanSelection} and the computer chose ${computerSelection}`);
-    playRound(humanSelection, computerSelection);
+        //storing choices in respective variables
+        console.log(`Round ${i}`)
+        let humanSelection = getHumanChoice();
+        let computerSelection = getComputerChoice();    
+        console.log(`You chose ${humanSelection} and the computer chose ${computerSelection}`);
+        playRound(humanSelection, computerSelection);
     }
 
+    //function to calculate the user with higer score. 
     function calcWinner(cScore, hScore){
         if (cScore > hScore){
             console.log("The computer scored higher than you :(. The computer wins!!");
