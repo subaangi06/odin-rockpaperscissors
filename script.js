@@ -13,15 +13,9 @@ function getComputerChoice(){
 
 }
 
-choiceTest = getComputerChoice();
-console.log(choiceTest);
-
 //function to prompt user for their choice
 function getHumanChoice(){
     choice = prompt("Enter your choice, rock, paper or scissors?").toLowerCase();
-    //REMOVE AFTER YOURE DONE PLEASE TY (TESTING)
-    console.log(choice);
-    return choice;
 }
 
 //initializing score variables
@@ -37,28 +31,34 @@ function playRound(humanChoice,computerChoice){
         } else if (humanChoice==="paper"){
             //RP
             console.log("You win! Paper beats rock.");
+            humanScore++;
         } else {
             //RS
             console.log("You lose! Rock beats scissors.")
+            computerScore++;
         }
     } else if (computerChoice==="paper"){
         if (humanChoice ==="rock"){
             //PR
             console.log("You lose! Paper beats rock.");
+            computerScore++;
         } else if (humanChoice==="paper"){
             //PP
             console.log("It's a tie!");
         } else{
             //PS
             console.log("You win! Scissors beat paper.");
+            humanScore++;
         }
     } else{
         if (humanChoice ==="rock"){
             //SR
             console.log("You win! Rock beats scissors.");
+            humanScore++;
         } else if (humanChoice ==='paper'){
             //SP
             console.log("You lose! Scissors beat paper.");
+            computerScore++;
         } else{
             //SS
             console.log("It's a tie!");
@@ -68,7 +68,11 @@ function playRound(humanChoice,computerChoice){
 }
 
 
-//test function
+//storing choices in respective variables
 const humanSelection = getHumanChoice();
-const computerSelection = choiceTest;
-playRound(humanSelection, computerSelection);
+const computerSelection = getComputerChoice();
+
+//loop for 5 rounds
+for(let i=0; i<5; i++){
+    playRound();
+}
