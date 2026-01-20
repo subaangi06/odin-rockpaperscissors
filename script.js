@@ -19,8 +19,16 @@ let computerScore=0;
 
 const body = document.querySelector("body");
 const outputDiv = document.createElement("div");
-outputDiv.textContent = "Results will show here as each round is played!"
+outputDiv.textContent = "Round outcome will be shown as the game progresses here!"
 body.appendChild(outputDiv)
+
+const computerChoiceDiv = document.createElement("div");
+computerChoiceDiv.textContent = "The choice that the computer makes wil be shown here.";
+body.appendChild(computerChoiceDiv);
+
+const scoreDiv = document.createElement('div');
+scoreDiv.textContent = "Scores will update here after every round!"
+body.appendChild(scoreDiv);
 
 
 function playRound(humanChoice,computerChoice){
@@ -53,38 +61,48 @@ function playRound(humanChoice,computerChoice){
     } else{
         if (humanChoice ==="rock"){
             //SR
-            outputDiv.TextContent = "You win! Rock beats scissors.";
+            outputDiv.textContent = "You win! Rock beats scissors.";
             humanScore++;
         } else if (humanChoice ==='paper'){
             //SP
-            outputDiv.TextContent = "You lose! Scissors beat paper.";
+            outputDiv.textContent = "You lose! Scissors beat paper.";
             computerScore++;
         } else{
             //SS
-            outputDiv.TextContent = "It's a tie!";
+            outputDiv.textContent = "It's a tie!";
         }
     }
+    computerChoiceDiv.textContent = `The choice that the computer made is: ${computerChoice}`;
+    scoreDiv.textContent = `Scores: Your score is ${humanScore}, the computer's score is ${computerScore}`;
 
 }
-
-
 const buttons = document.querySelectorAll("button");
-while (humanScore<5 && computerScore<5){
-    buttons.forEach((button) => {
-        button.addEventListener("click", ()=> {
+function disableButtons(){
+    buttons.forEach(btn => btn.disabled = true);
+}
+
+function checkWinner(){
+    if (humanScore ===5){
+        body.removeChild(computerChoiceDiv);
+        outputDiv.textContent = "You win!! Great job :)";
+        disableButtons();
+    } else if (computerScore===5){
+        body.removeChild(computerChoiceDiv);
+        outputDiv.textContent = "Sorry, the computer won :( Better luck next time!!";
+        disableButtons();
+    }
+}
+
+buttons.forEach((button) => {
+    button.addEventListener("click", ()=> {
+        if (humanScore<5 && computerScore<5){
             const computerChoice = getComputerChoice();
             const humanChoice = button.id;
-
             playRound(humanChoice, computerChoice);
-        })
+            checkWinner();
+        }
+
     })
-}
-
-if (humanScore==5){
-    outputDiv.textContent = "You win!";
-} else{
-    outputDiv.textContent = "Sorry, the computer wins :("
-}
-
+})
 
 
