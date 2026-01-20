@@ -90,7 +90,7 @@ function checkWinner(){
         outputDiv.textContent = "You win!! Great job :)";
         disableButtons();
     } else if (computerScore===5){
-        body.removeChild(computerChoiceDiv);
+        body.removeChild(choiceDiv);
         outputDiv.textContent = "Sorry, the computer won :( Better luck next time!!";
         disableButtons();
     }
