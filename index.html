@@ -4,9 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RockPaperScissors</title>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
-    
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+
+    <style>
+        body{
+            display:flex;
+            justify-content:center;
+            align-items:center;       
+            min-height:100vh;
+            gap:10px;
+            background-color:black;
+            color:white;
+        }
+        
+        button{
+            border-radius:10px;
+            padding:10px;
+            height:50px;
+            background-color:white;
+            color:black;
+            cursor:pointer;
+            border: 0px;
+        }
+    </style>
 </body>
 </html>
