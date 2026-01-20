@@ -22,11 +22,11 @@ choiceDiv.textContent = "The choice that each player makes wil be shown here.";
 body.appendChild(choiceDiv);
 
 const outputDiv = document.createElement("div");
-outputDiv.textContent = "Round outcome will be shown as the game progresses here!"
+outputDiv.textContent = "Round outcome will be shown as the game progresses here!";
 body.appendChild(outputDiv)
 
 const scoreDiv = document.createElement('div');
-scoreDiv.textContent = "Scores will update here after every round!"
+scoreDiv.textContent = "Scores will update here after every round!";
 body.appendChild(scoreDiv);
 
 
@@ -80,19 +80,34 @@ function playRound(humanChoice,computerChoice){
 
 }
 const buttons = document.querySelectorAll("button");
-function disableButtons(){
-    buttons.forEach(btn => btn.disabled = true);
+
+function resetGame(){
+    humanScore = 0;
+    computerScore = 0;
+
+    choiceDiv.textContent = "The choice that each player makes wil be shown here.";
+    //reappend child since it was removed when displaying winner
+    body.appendChild(choiceDiv);
+    outputDiv.textContent = "Round outcome will be shown as the game progresses here!";
+    scoreDiv.textContent = "Scores will update here after every round!";
+
+
 }
 
 function checkWinner(){
     if (humanScore ===5){
         body.removeChild(choiceDiv);
-        outputDiv.textContent = "You win!! Great job :)";
-        disableButtons();
+        alert("You win!! Great job :)");
+        alert("The game will reset now!");
+        resetGame();
+
+        
     } else if (computerScore===5){
         body.removeChild(choiceDiv);
-        outputDiv.textContent = "Sorry, the computer won :( Better luck next time!!";
-        disableButtons();
+        alert("Sorry, the computer won :( Better luck next time!!");
+        alert("The game will reset now!");
+        resetGame();
+        
     }
 }
 
@@ -102,7 +117,11 @@ buttons.forEach((button) => {
             const computerChoice = getComputerChoice();
             const humanChoice = button.id;
             playRound(humanChoice, computerChoice);
-            checkWinner();
+            
+            //allow website to update the text before checking for a winner
+            setTimeout(() => {
+                checkWinner();
+            }, 5)
         }
 
     })
