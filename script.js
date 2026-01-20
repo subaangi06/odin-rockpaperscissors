@@ -16,15 +16,14 @@ function getComputerChoice(){
 let humanScore=0;
 let computerScore=0;
 
-
 const body = document.querySelector("body");
+const choiceDiv = document.createElement("div");
+choiceDiv.textContent = "The choice that each player makes wil be shown here.";
+body.appendChild(choiceDiv);
+
 const outputDiv = document.createElement("div");
 outputDiv.textContent = "Round outcome will be shown as the game progresses here!"
 body.appendChild(outputDiv)
-
-const computerChoiceDiv = document.createElement("div");
-computerChoiceDiv.textContent = "The choice that the computer makes wil be shown here.";
-body.appendChild(computerChoiceDiv);
 
 const scoreDiv = document.createElement('div');
 scoreDiv.textContent = "Scores will update here after every round!"
@@ -72,7 +71,11 @@ function playRound(humanChoice,computerChoice){
             outputDiv.textContent = "It's a tie!";
         }
     }
-    computerChoiceDiv.textContent = `The choice that the computer made is: ${computerChoice}`;
+    if (computerChoice == humanChoice) {
+        choiceDiv.textContent = `Both players made the choice of ${computerChoice}`;
+    } else{
+        choiceDiv.textContent = `The choice that the computer made is: ${computerChoice}. The choice that you made is: ${humanChoice}`;
+    }
     scoreDiv.textContent = `Scores: Your score is ${humanScore}, the computer's score is ${computerScore}`;
 
 }
@@ -83,7 +86,7 @@ function disableButtons(){
 
 function checkWinner(){
     if (humanScore ===5){
-        body.removeChild(computerChoiceDiv);
+        body.removeChild(choiceDiv);
         outputDiv.textContent = "You win!! Great job :)";
         disableButtons();
     } else if (computerScore===5){
